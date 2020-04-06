@@ -3,11 +3,11 @@ set -ex
 
 AWS_REGION="eu-west-1"
 
-ARTIFACT=`packer build -machine-readable packer-demo.json | awk -F, '$0 ~/artifact,0,id/ {print $6}'`
+ARTIFACT=`packer build -machine-readable packer-demo.json`
 echo "packer output:"
 cat packer-demo.json
 
-AMI_ID=`echo $ARTIFACT | cut -d ':' -f2`
+AMI_ID=`echo $ARTIFACT`
 echo "AMI ID: ${AMI_ID}"
 
 echo "writing amivar.tf and uploading it to s3"
